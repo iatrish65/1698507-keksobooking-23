@@ -69,55 +69,58 @@ function randomDigitPoint (min, max, nut) {
   return Math.floor((random) * decimalPoint) / decimalPoint;
 }
 
-//randomDigitPoint (1, 9, 5);
 
-const RandomArrayElement = (elements) => elements[randomDigit(0, elements.length - 1)];
+const getRandomArrayElement = (elements) => elements[randomDigit(0, elements.length - 1)];
 
-const ShuffleArray = (array) => array.sort(() => Math.random() - 0.5).slice(Math.floor(Math.random()*array.length));
+const getShuffleArray = (array) => array.sort(() => Math.random() - 0.5).slice(Math.floor(Math.random()*array.length));
 
-const ImageNumber = () => {
+const getImageNumber = () => {
   const number = randomDigit (1, 10);
-
-  if (number < 10) {
-    return `user0${number}`;
-  }
-  return `user${number}`;
+  return (number < 10) ? `user0${number}` : `user${number}`;
 };
 
-const Author = () => ({
-  avatar: `img/avatars/${ImageNumber()}.png`,
+const getAuthor = () => ({
+  avatar: `img/avatars/${getImageNumber()}.png`,
 });
 
-const Title = () => `'Аппартаменты для вас'${randomDigit (1, 10)}`;
+const getTitle = () => `Предложение №${randomDigit (1, 10)}`;
 
-const Description = () => `'Наполнение обстановки по вашему настроению'${randomDigit (1, 10)}`;
+const getDescription = () => `Описание №${randomDigit (1, 10)}`;
 
-const Location = () => ({
-  lat: randomDigitPoint(35.65000, 35.70000, 5),
-  lng: randomDigitPoint(139.70000, 139.80000, 5),
-});
+const SIMILAR_LOCATION_COUNT = 1;
 
-const Offer = () => ({
-  title: Title(),
-  adress: `${Location().lat} , ${Location().lng}`,
+const getLocation = () => {
+  return {
+    lat: randomDigitPoint(35.65000, 35.70000, 5),
+    lng: randomDigitPoint(139.70000, 139.80000, 5),
+  };
+};
+
+const pointLocation = new Array(SIMILAR_LOCATION_COUNT).fill().map(() => getLocation());
+
+const getOffer = () => ({
+  title: getTitle(),
+  adress: pointLocation,
   price: randomDigit(PRICE.min, PRICE.max),
   rooms: randomDigit(1, 4),
   guests: randomDigit(1, 10),
-  type: RandomArrayElement(TYPE),
-  checkin: RandomArrayElement(CHECKIN),
-  checkout: RandomArrayElement(CHECKOUT),
-  features: ShuffleArray(FEATURES),
-  photos: ShuffleArray(PHOTOS),
-  description: Description(),
-
+  type: getRandomArrayElement(TYPE),
+  checkin: getRandomArrayElement(CHECKIN),
+  checkout: getRandomArrayElement(CHECKOUT),
+  features: getShuffleArray(FEATURES),
+  photos: getShuffleArray(PHOTOS),
+  description: getDescription(),
 });
 
 const createList = () => ({
-  autor: Author(),
-  offer: Offer(),
-  location: Location(),
+  autor: getAuthor(),
+  offer: getOffer(),
+  location: pointLocation,
 });
 
-const NewArray = new Array(10).fill(null).map(() => createList());
+const getNewArray = new Array(10).fill().map(() => createList());
+export {getNewArray};
 
-export {NewArray};
+//console.log(pointLocation);
+//console.log(getOffer());
+//console.log(createList());
