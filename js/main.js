@@ -72,7 +72,7 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-const Location = {
+const LOCATION = {
   LAT_MIN: 35.65000,
   LAT_MAX: 35.70000,
   LNG_MIN: 139.70000,
@@ -118,7 +118,7 @@ const getImageNumber = () => {
 };
 
 const getAuthor = () => ({
-  avatar: `img/avatars/user${getImageNumber()}.png`,
+  avatar: `img/avatars/${getImageNumber()}.png`,
 });
 
 const getTitle = () => `Предложение №${randomDigit (1, 10)}`;
@@ -126,16 +126,18 @@ const getTitle = () => `Предложение №${randomDigit (1, 10)}`;
 const getDescription = () => `Описание №${randomDigit (1, 10)}`;
 
 const getLocation = () => {
-  const lat = randomDigitPoint(Location.LAT_MIN, Location.LAT_MAX, 5);
-  const lng = randomDigitPoint(Location.LNG_MIN, Location.LNG_MAX, 5);
+  const lat = randomDigitPoint(LOCATION.LAT_MIN, LOCATION.LAT_MAX, 5);
+  const lng = randomDigitPoint(LOCATION.LNG_MIN, LOCATION.LNG_MAX, 5);
   return  (`${lat} , ${lng}`);
 };
 
-//const pointLocation = new Array(10).fill().map(() => getLocation());
+const pointLocation = getLocation();
+
+//const pointLocation = new Array(10).fill().map(() => );
 
 const getOffer = () => ({
   title: getTitle(TITLES),
-  adress: getLocation(),
+  adress: pointLocation,
   price: randomDigit(PRICE.min, PRICE.max),
   rooms: randomDigit(ROOMS.min, ROOMS.max),
   guests: randomDigit(GUESTS.min, GUESTS.max),
@@ -150,8 +152,11 @@ const getOffer = () => ({
 const createList = () => ({
   autor: getAuthor(),
   offer: getOffer(),
-  location: getLocation(),
+  location: pointLocation,
 });
 
-const getNewArray = new Array(10).fill().map(() => createList());
-export {getNewArray};
+//const getNewArray = new Array(10).fill().map(() => createList());
+//export {getNewArray};
+
+console.log(createList());
+
