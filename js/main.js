@@ -1,8 +1,7 @@
-//const AUTHOR = {
-//  avatar: img/avatars/user{getImageNumber()}.png
-//};
-
-//offer:
+const DECIMAL_PLACES = 5;
+const VARIABLE_MIN = 1;
+const VARIABLE_MAX = 10;
+const NUMBER_ADS = 10;
 
 const TITLES = [
   'Уютный рай в центре города',
@@ -11,8 +10,6 @@ const TITLES = [
   'Молодежная для вечеринок',
   'Молодой семье рядом баня и детский сад',
 ];
-
-//const ADDRESS = {{location.lat}}, {{location.lng}};
 
 const PRICE = {
   min: 1000,
@@ -89,21 +86,21 @@ function randomDigit (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function randomDigitPoint (min, max, nut) {
+function randomDigitPoint (min, max, num) {
   if (min >= max || min < 0 || max <= 0) {
     throw new Error('Диапазон включает только положительные числа. Число "от" не может быть больше числа "до".');
   }
 
-  if (nut < 0) {
+  if (num < 0) {
     throw new Error('Значение должно быть больше или равно 0');
   }
 
-  if ((nut ^ 0) !== nut) {
+  if ((num ^ 0) !== num) {
     throw new Error('Значение должно быть целым числом');
   }
 
-  const decimalPoint = Math.pow(10, nut);
-  const random = +((min + Math.random() * (max - min)).toFixed(nut));
+  const decimalPoint = Math.pow(10, num);
+  const random = +((min + Math.random() * (max - min)).toFixed(num));
   return Math.floor((random) * decimalPoint) / decimalPoint;
 }
 
@@ -113,31 +110,35 @@ const getRandomArrayElement = (elements) => elements[randomDigit(0, elements.len
 const getShuffleArray = (array) => array.sort(() => Math.random() - 0.5).slice(Math.floor(Math.random()*array.length));
 
 const getImageNumber = () => {
-  const number = randomDigit (1, 10);
+  const number = randomDigit (VARIABLE_MIN, VARIABLE_MAX);
   return (number < 10) ? `user0${number}` : `user${number}`;
 };
 
-const getAuthor = () => ({
-  avatar: `img/avatars/${getImageNumber()}.png`,
+const digitLeft = (num) => String(num).padStart(2, '0');
+const getAuthor = (NUMBER_ADS) => ({
+  avatar: `img/avatars/${digitLeft(getImageNumber())}.png`,
 });
+/*const getAuthor = (num) => `img/avatars/${padLeft(num)}.png`;
+const getAuthor = (num) => ({
+  avatar: `img/avatars/${num}.png`,
+});*/
 
-const getTitle = () => `Предложение №${randomDigit (1, 10)}`;
+const getTitle = () => `Предложение №${randomDigit (VARIABLE_MIN, VARIABLE_MAX)}`;
 
-const getDescription = () => `Описание №${randomDigit (1, 10)}`;
+const getDescription = () => `Описание №${randomDigit (VARIABLE_MIN, VARIABLE_MAX)}`;
 
 const getLocation = () => {
-  const lat = randomDigitPoint(LOCATION.LAT_MIN, LOCATION.LAT_MAX, 5);
-  const lng = randomDigitPoint(LOCATION.LNG_MIN, LOCATION.LNG_MAX, 5);
-  return  (`${lat} , ${lng}`);
+  const lat = randomDigitPoint(LOCATION.LAT_MIN, LOCATION.LAT_MAX, DECIMAL_PLACES);
+  const lng = randomDigitPoint(LOCATION.LNG_MIN, LOCATION.LNG_MAX, DECIMAL_PLACES);
+  return  {
+    lat,
+    lng,
+  };
 };
 
-const pointLocation = getLocation();
-
-//const pointLocation = new Array(10).fill().map(() => );
-
-const getOffer = () => ({
+const getOffer = (pointLocation) => ({
   title: getTitle(TITLES),
-  adress: pointLocation,
+  address: `${pointLocation.lat}, ${pointLocation.lng}`,
   price: randomDigit(PRICE.min, PRICE.max),
   rooms: randomDigit(ROOMS.min, ROOMS.max),
   guests: randomDigit(GUESTS.min, GUESTS.max),
@@ -149,14 +150,16 @@ const getOffer = () => ({
   description: getDescription(DESCRIPTIONS),
 });
 
-const createList = () => ({
-  autor: getAuthor(),
-  offer: getOffer(),
-  location: pointLocation,
-});
+const createList = (num) => {
+  const pointLocation = getLocation();
+  return {
+    author: getAuthor(NUMBER_ADS),
+    offer: getOffer(pointLocation),
+    location: pointLocation,
+  };
+};
 
-//const getNewArray = new Array(10).fill().map(() => createList());
+//const getNewArray = new Array(NUMBER_ADS).fill().map((it, num) => createList(num));
 //export {getNewArray};
 
-console.log(createList());
-
+//console.log(createList());
