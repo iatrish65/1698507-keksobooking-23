@@ -109,19 +109,15 @@ const getRandomArrayElement = (elements) => elements[randomDigit(0, elements.len
 
 const getShuffleArray = (array) => array.sort(() => Math.random() - 0.5).slice(Math.floor(Math.random()*array.length));
 
-const getImageNumber = () => {
-  const num = randomDigit (VARIABLE_MIN, VARIABLE_MAX);
-  return (num < 10) ? `user0${num}` : `user${num}`;
-};
+/*const getImageNumber = () => {};
+const num = randomDigit (VARIABLE_MIN, VARIABLE_MAX);
+  return (num < 10) ? `user0${num}` : `user${num}`;*/
+
 
 const digitLeft = (num) => String(num).padStart(2, '0');
 const getAuthor = (num) => ({
   avatar: `img/avatars/${digitLeft(num)}.png`,
 });
-/*const getAuthor = (num) => `img/avatars/${padLeft(num)}.png`;
-const getAuthor = (num) => ({
-  avatar: `img/avatars/${num}.png`,
-});*/
 
 const getTitle = () => `Предложение №${randomDigit (VARIABLE_MIN, VARIABLE_MAX)}`;
 
@@ -152,15 +148,15 @@ const getOffer = (pointLocation) => ({
 
 const createList = (num) => {
   const pointLocation = getLocation();
-  const meter = getImageNumber();
+  //const meter = getImageNumber();
   return {
-    author: getAuthor(meter),
+    author: getAuthor(num),
     offer: getOffer(pointLocation),
     location: pointLocation,
   };
 };
 
 const getNewArray = new Array(NUMBER_ADS).fill().map((it, num) => createList(num));
-export {getNewArray};
+//export {getNewArray};
 
-//console.log(createList());
+console.log(createList());
