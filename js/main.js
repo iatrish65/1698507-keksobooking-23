@@ -1,7 +1,7 @@
 const DECIMAL_PLACES = 5;
 const VARIABLE_MIN = 1;
 const VARIABLE_MAX = 10;
-const NUMBER_ADS = 10;
+const NUMBER_ADS = 11;
 
 const TITLES = [
   'Уютный рай в центре города',
@@ -104,19 +104,13 @@ function randomDigitPoint (min, max, num) {
   return Math.floor((random) * decimalPoint) / decimalPoint;
 }
 
-
 const getRandomArrayElement = (elements) => elements[randomDigit(0, elements.length - 1)];
 
 const getShuffleArray = (array) => array.sort(() => Math.random() - 0.5).slice(Math.floor(Math.random()*array.length));
 
-/*const getImageNumber = () => {};
-const num = randomDigit (VARIABLE_MIN, VARIABLE_MAX);
-  return (num < 10) ? `user0${num}` : `user${num}`;*/
-
-
 const digitLeft = (num) => String(num).padStart(2, '0');
 const getAuthor = (num) => ({
-  avatar: `img/avatars/${digitLeft(num)}.png`,
+  avatar: `img/avatars/user${digitLeft(num)}.png`,
 });
 
 const getTitle = () => `Предложение №${randomDigit (VARIABLE_MIN, VARIABLE_MAX)}`;
@@ -148,7 +142,6 @@ const getOffer = (pointLocation) => ({
 
 const createList = (num) => {
   const pointLocation = getLocation();
-  //const meter = getImageNumber();
   return {
     author: getAuthor(num),
     offer: getOffer(pointLocation),
@@ -157,6 +150,7 @@ const createList = (num) => {
 };
 
 const getNewArray = new Array(NUMBER_ADS).fill().map((it, num) => createList(num));
-//export {getNewArray};
+delete getNewArray[0];
 
-console.log(createList());
+//console.log(createList(NUMBER_ADS));
+//console.log(getNewArray);
