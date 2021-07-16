@@ -110,7 +110,7 @@ const getShuffleArray = (array) => array.sort(() => Math.random() - 0.5).slice(M
 
 const digitLeft = (num) => String(num).padStart(2, '0');
 const getAuthor = (num) => ({
-  avatar: `img/avatars/user${digitLeft(num)}.png`,
+  avatar: `img/avatars/user${digitLeft(num+1)}.png`,
 });
 
 const getTitle = () => `Предложение №${randomDigit (VARIABLE_MIN, VARIABLE_MAX)}`;
@@ -150,7 +150,3 @@ const createList = (num) => {
 };
 
 const getNewArray = new Array(NUMBER_ADS).fill().map((it, num) => createList(num));
-delete getNewArray[0];
-
-//console.log(createList(NUMBER_ADS));
-//console.log(getNewArray);
