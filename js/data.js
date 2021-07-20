@@ -13,7 +13,20 @@ const TITLES = [
 
 const PRICE = {
   min: 1000,
-  max: 50000,
+  max: 1000000,
+};
+
+const HEAD_LINE = {
+  MIN: 30,
+  MAX: 100,
+};
+
+const PRICE_NITE = {
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000,
 };
 
 const TYPES = [
@@ -24,15 +37,25 @@ const TYPES = [
   'hotel',
 ];
 
-const ROOMS = {
-  min: 1,
-  max: 5,
+const ITEM_TYPES = {
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+  hotel: 'Отель',
 };
 
-const GUESTS = {
-  min: 1,
-  max: 10,
-};
+const ROOMS = [
+  'комната',
+  'комнаты',
+  'комнат',
+];
+
+const GUESTS = [
+  'гостя',
+  'гостей',
+  'не для гостей',
+];
 
 const CHECKIN = [
   '12:00',
@@ -82,8 +105,11 @@ export {
   VARIABLE_MAX,
   NUMBER_ADS,
   TITLES,
+  HEAD_LINE,
   PRICE,
+  PRICE_NITE,
   TYPES,
+  ITEM_TYPES,
   ROOMS,
   GUESTS,
   CHECKIN,

@@ -9,8 +9,11 @@ import {
   VARIABLE_MAX,
   NUMBER_ADS,
   TITLES,
+  HEAD_LINE,
   PRICE,
+  PRICE_NITE,
   TYPES,
+  ITEM_TYPES,
   ROOMS,
   GUESTS,
   CHECKIN,
@@ -68,6 +71,35 @@ const createList = (num) => {
 
 const getNewArray = new Array(NUMBER_ADS).fill().map((it, num) => createList(num));
 
+const createMultiNames = (value, words) => {
+  value = Math.abs(value) % 100;
+  const num = value % 10;
+  if (value > 10 && value < 20) { return words[2]; }
+  if (num > 1 && num < 5) { return words[1]; }
+  if (num === 1) { return words[0]; }
+  return words[2];
+};
+
+const removeExtra = (elements, elementClasses) => {
+  elements.forEach((element) => {
+    const elementClass = element.classList[1];
+    if (!elementClasses.includes(elementClass)) {
+      element.remove();
+    }
+  });
+};
+
+const fillPhotoOrDelete = (photos, block, element) => {
+  if (photos && photos.length > 0) {
+    photos.forEach((photo) => {
+      const clonePhoto = element.cloneNode(true);
+      clonePhoto.src = photo;
+      block.appendChild(clonePhoto);
+    });
+  }
+  element.remove();
+};
+
 export {
   getRandomArrayElement,
   getShuffleArray,
@@ -78,4 +110,7 @@ export {
   getOffer,
   createList,
   getNewArray
+  createMultiNames,
+  removeExtra,
+  fillPhotoOrDelete
 };
