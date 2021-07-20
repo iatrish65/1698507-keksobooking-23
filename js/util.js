@@ -9,11 +9,11 @@ import {
   VARIABLE_MAX,
   NUMBER_ADS,
   TITLES,
-  HEAD_LINE,
+  //HEAD_LINE,
   PRICE,
-  PRICE_NITE,
+  //PRICE_NITE,
   TYPES,
-  ITEM_TYPES,
+  //ITEM_TYPES,
   ROOMS,
   GUESTS,
   CHECKIN,
@@ -109,7 +109,7 @@ export {
   getLocation,
   getOffer,
   createList,
-  getNewArray
+  getNewArray,
   createMultiNames,
   removeExtra,
   fillPhotoOrDelete

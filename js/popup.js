@@ -22,7 +22,7 @@ const displayAd = (data) => {
   cardElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
   cardElement.querySelector('.popup__type').textContent = ITEM_TYPES[offer.type];
 
-  cardElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} ${createPluralNames(offer.rooms, ROOMS)} для ${offer.guests} ${createPluralNames(offer.guests, GUESTS)}`;
+  cardElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} ${createMultiNames(offer.rooms, ROOMS)} для ${offer.guests} ${createMultiNames(offer.guests, GUESTS)}`;
   cardElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin} выезд до ${offer.checkout}`;
 
   const offerFeatureClasses = offer.features && offer.features.map((features) => `popup__feature--${features}`) || [];
@@ -44,4 +44,4 @@ export {
   displayAd
 };
 
-displayAd = require("./popup");
+//displayAd = require('./popup');

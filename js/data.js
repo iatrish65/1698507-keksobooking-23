@@ -16,7 +16,7 @@ const PRICE = {
   max: 1000000,
 };
 
-const HEAD_LINE = {
+/*const HEAD_LINE = {
   MIN: 30,
   MAX: 100,
 };
@@ -27,7 +27,7 @@ const PRICE_NITE = {
   hotel: 3000,
   house: 5000,
   palace: 10000,
-};
+};*/
 
 const TYPES = [
   'palace',
@@ -105,9 +105,9 @@ export {
   VARIABLE_MAX,
   NUMBER_ADS,
   TITLES,
-  HEAD_LINE,
+  //HEAD_LINE,
   PRICE,
-  PRICE_NITE,
+  //PRICE_NITE,
   TYPES,
   ITEM_TYPES,
   ROOMS,
